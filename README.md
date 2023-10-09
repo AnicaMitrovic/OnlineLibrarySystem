@@ -7,8 +7,6 @@ The API Services have operations for the following:
 2.	Books can be searched or retrieved based on search criteria like 
 Author, Publisher, Name of the Book
 3.	Remove the book from the library only for the Authorized User. You can use JWT for creating Token for Authorization & validating the user.
-
-  	Currently only Login available with username ```admin```, password ```admin```
 4.	Update the Book name, or Author, or Publisher.
 
 #### Getting Started
