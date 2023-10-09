@@ -10,6 +10,6 @@ namespace OnlineLibrary.Application.Interfaces
         Task<BookResponseDto> AddBook(BookRequestDto bookRequestDto);
         Task<List<BookResponseDto>> SearchBooks(SearchBookRequestDto searchBookDto);
         Task<BookResponseDto> DeleteBook(int id);
-        Task<ServiceResponse<BookResponseDto>> UpdateBook(BookRequestDto bookToUpdate, int id);
+        Task<BookResponseDto> UpdateBook(BookRequestDto bookToUpdate, int id);
     }
 }

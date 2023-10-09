@@ -45,23 +45,11 @@ namespace OnlineLibrary.Infrastructure.Services
             return books.Select(book => _mapper.Map<BookResponseDto>(book)).ToList();
         }
 
-        public async Task<ServiceResponse<BookResponseDto>> UpdateBook(BookRequestDto bookToUpdateDto, int id)
+        public async Task<BookResponseDto> UpdateBook(BookRequestDto bookToUpdateDto, int id)
         {
-            var response = new ServiceResponse<BookResponseDto>();
-            Book? bookToUpdate = await _bookRepository.UpdateBook(bookToUpdateDto, id);
+            Book? updatedBook = await _bookRepository.UpdateBook(bookToUpdateDto, id);
 
-            if (bookToUpdate is null)
-            {
-                return await Task.FromResult(new ServiceResponse<BookResponseDto>
-                {
-                    Message = $"No book found with ID {id}",
-                    Success = false
-                });
-            }
-
-            response.Data = _mapper.Map<BookResponseDto>(bookToUpdate);
-
-            return response;
+            return _mapper.Map<BookResponseDto>(updatedBook);
         }
     }
 }
