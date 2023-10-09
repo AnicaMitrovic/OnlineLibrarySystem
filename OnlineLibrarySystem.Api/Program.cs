@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineLibrary.Application;
 using OnlineLibrary.Application.Interfaces;
+using OnlineLibrary.Application.Middlewares;
 using OnlineLibrary.Infrastructure;
 using OnlineLibrary.Infrastructure.Data;
 using OnlineLibrary.Infrastructure.DataModels;
@@ -61,6 +62,8 @@ namespace OnlineLibrarySystem.Api
                     };
                 });
 
+            builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -75,6 +78,8 @@ namespace OnlineLibrarySystem.Api
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
             app.MapControllers();
 

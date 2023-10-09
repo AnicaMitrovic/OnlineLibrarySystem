@@ -65,11 +65,6 @@ namespace OnlineLibrary.Infrastructure.Data
             var bookToUpdate = _db.BookList.FirstOrDefault(b => b.Id == id);
             if (bookToUpdate is null)
             {
-                //return await Task.FromResult(new ServiceResponse<List<Book>>
-                //{
-                //    Message = $"No book found with ID {id}",
-                //    Success = false
-                //});
                 return null;
             }
 

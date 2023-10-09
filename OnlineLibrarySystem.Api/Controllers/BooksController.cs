@@ -29,7 +29,7 @@ namespace OnlineLibrarySystem.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBook([FromBody] BookRequestDto newBookDto)
+        public async Task<IActionResult> AddBook(BookRequestDto newBookDto)
         {
             if (newBookDto is null)
             {

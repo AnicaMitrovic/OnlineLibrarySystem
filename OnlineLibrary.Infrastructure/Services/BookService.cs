@@ -5,7 +5,6 @@ using OnlineLibrary.Domain.Entities;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
 using OnlineLibrary.Domain.Entities.Dtos.Response;
 using OnlineLibrary.Infrastructure.Interfaces;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OnlineLibrary.Infrastructure.Services
 {
@@ -47,11 +46,23 @@ namespace OnlineLibrary.Infrastructure.Services
             return books.Select(book => _mapper.Map<BookResponseDto>(book)).ToList();
         }
 
-        public async Task<BookResponseDto> UpdateBook(BookRequestDto bookToUpdateDto, int id)
+        public async Task<ServiceResponse<BookResponseDto>> UpdateBook(BookRequestDto bookToUpdateDto, int id)
         {
-            Book? updatedBook = await _bookRepository.UpdateBook(bookToUpdateDto, id);
+            var response = new ServiceResponse<BookResponseDto>();
+            Book? bookToUpdate = await _bookRepository.UpdateBook(bookToUpdateDto, id);
 
-            return _mapper.Map<BookResponseDto>(updatedBook);
+            if (bookToUpdate is null)
+            {
+                return await Task.FromResult(new ServiceResponse<BookResponseDto>
+                {
+                    Message = $"No book found with ID {id}",
+                    Success = false
+                });
+            }
+
+            response.Data = _mapper.Map<BookResponseDto>(bookToUpdate);
+
+            return response;
         }
     }
 }
