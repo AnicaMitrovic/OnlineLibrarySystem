@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using OnlineLibrary.Domain.Entities;
+﻿using OnlineLibrary.Domain.Entities;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
 using OnlineLibrary.Infrastructure.DataModels;
 using OnlineLibrary.Infrastructure.Interfaces;
-using System.Runtime.CompilerServices;
 
 namespace OnlineLibrary.Infrastructure.Data
 {
@@ -21,20 +19,22 @@ namespace OnlineLibrary.Infrastructure.Data
             return await Task.FromResult(_db.BookList);
         }
 
-        //public async Task<ServiceResponse<List<Book>>> AddBook(BookRequestDto newBook)
-        //{
-        //    newBook.Id = _db.BookList.OrderByDescending(b => b.Id).FirstOrDefault()!.Id + 1;
-        //    bookList.Add(newBook);
+        public async Task<Book> AddBook(BookRequestDto newBookDto)
+        {
+            int id = _db.BookList.OrderByDescending(b => b.Id).FirstOrDefault()!.Id + 1;
+            Book bookToAdd = new Book
+            {
+                Id = id,
+                Title = newBookDto.Title,
+                Author = newBookDto.Author,
+                Publisher = newBookDto.Publisher,
+                Timestamp = DateTime.Now
+            };
 
-        //    var serviceResponse = new ServiceResponse<List<Book>>
-        //    {
-        //        Data = bookList,
-        //        Message = $"Book with ID {newBook.Id} has been added",
-        //        Success = true
-        //    };
+            _db.BookList.Add(bookToAdd);
 
-        //    return await Task.FromResult(serviceResponse);
-        //}
+            return await Task.FromResult(bookToAdd);
+        }
 
         public async Task<List<Book>> SearchBooks(SearchBookRequestDto searchBookDto)
         {
@@ -49,44 +49,35 @@ namespace OnlineLibrary.Infrastructure.Data
             return await Task.FromResult(foundBooks);
         }
 
-        //public async Task<ServiceResponse<List<Book>>> DeleteBook(int id)
-        //{
-        //    bookList.RemoveAll(b => b.Id == id);
+        public async Task<Book?> DeleteBook(int id)
+        {
+            var bookToDelete = _db.BookList.Where(book => book.Id == id).FirstOrDefault();
+            if (bookToDelete is not null)
+            {
+                _db.BookList.RemoveAll(b => b.Id == bookToDelete.Id);
+                return await Task.FromResult(bookToDelete);
+            }
+            return null;
+        }
 
-        //    var serviceResponse = new ServiceResponse<List<Book>>
-        //    {
-        //        Data = bookList,
-        //        Message = $"Book with ID {id} has been removed",
-        //        Success = true
-        //    };
+        public async Task<Book?> UpdateBook(BookRequestDto bookToUpdateDto, int id)
+        {
+            var bookToUpdate = _db.BookList.FirstOrDefault(b => b.Id == id);
+            if (bookToUpdate is null)
+            {
+                //return await Task.FromResult(new ServiceResponse<List<Book>>
+                //{
+                //    Message = $"No book found with ID {id}",
+                //    Success = false
+                //});
+                return null;
+            }
 
-        //    return await Task.FromResult(serviceResponse);
-        //}
+            bookToUpdate.Title = bookToUpdateDto.Title;
+            bookToUpdate.Author = bookToUpdateDto.Author;
+            bookToUpdate.Publisher = bookToUpdateDto.Publisher;
 
-        //public async Task<ServiceResponse<List<Book>>> UpdateBook(int id, Book bookToUpdate)
-        //{
-        //    var book = bookList.FirstOrDefault(b => b.Id == id);
-        //    if (book == null)
-        //    {
-        //        return await Task.FromResult(new ServiceResponse<List<Book>>
-        //        {
-        //            Message = $"No book found with ID {id}",
-        //            Success = false
-        //        });
-        //    }
-
-        //    book.Title = bookToUpdate.Title;
-        //    book.Author = bookToUpdate.Author;
-        //    book.Publisher = bookToUpdate.Publisher;
-
-        //    var serviceResponse = new ServiceResponse<List<Book>>
-        //    {
-        //        Data = bookList,
-        //        Message = $"Book with ID {id} has been updated",
-        //        Success = true
-        //    };
-
-        //    return await Task.FromResult(serviceResponse);
-        //}        
+            return await Task.FromResult(bookToUpdate);
+        }
     }
 }

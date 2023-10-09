@@ -7,9 +7,9 @@ namespace OnlineLibrary.Infrastructure.Interfaces
     public interface IBookRepository
     {
         Task<List<Book>> GetAllBooks();
-        //Task<ServiceResponse<List<Book>>> AddBook(BookRequestDto newBook);
+        Task<Book> AddBook(BookRequestDto newBookDto);
         Task<List<Book>> SearchBooks(SearchBookRequestDto searchBookDto);
-        //Task<ServiceResponse<List<Book>>> DeleteBook(int id);
-        //Task<ServiceResponse<List<Book>>> UpdateBook(int id, Book bookToUpdate);
+        Task<Book?> DeleteBook(int id);
+        Task<Book?> UpdateBook(BookRequestDto bookToUpdateDto, int id);
     }
 }

@@ -5,6 +5,7 @@ using OnlineLibrary.Domain.Entities;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
 using OnlineLibrary.Domain.Entities.Dtos.Response;
 using OnlineLibrary.Infrastructure.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OnlineLibrary.Infrastructure.Services
 {
@@ -19,15 +20,18 @@ namespace OnlineLibrary.Infrastructure.Services
             _mapper = mapper;
         }
 
-        //public async Task<ServiceResponse<List<Book>>> AddBook(BookRequestDto newBook)
-        //{
-        //    return await _bookRepository.AddBook(newBook);
-        //}
+        public async Task<BookResponseDto> AddBook(BookRequestDto newBookDto)
+        {
+            Book addedBook = await _bookRepository.AddBook(newBookDto);
 
-        //public async Task<ServiceResponse<List<Book>>> DeleteBook(int id)
-        //{
-        //    return await _bookRepository.DeleteBook(id);
-        //}
+            return _mapper.Map<BookResponseDto>(addedBook);
+        }
+
+        public async Task<BookResponseDto> DeleteBook(int id)
+        {
+            Book? deletedBook = await _bookRepository.DeleteBook(id);
+            return _mapper.Map<BookResponseDto>(deletedBook);
+        }
 
         public async Task<List<BookResponseDto>> GetAllBooks()
         {
@@ -43,9 +47,11 @@ namespace OnlineLibrary.Infrastructure.Services
             return books.Select(book => _mapper.Map<BookResponseDto>(book)).ToList();
         }
 
-        //public async Task<ServiceResponse<List<Book>>> UpdateBook(int id, Book bookToUpdate)
-        //{
-        //    return await _bookRepository.UpdateBook(id, bookToUpdate);
-        //}
+        public async Task<BookResponseDto> UpdateBook(BookRequestDto bookToUpdateDto, int id)
+        {
+            Book? updatedBook = await _bookRepository.UpdateBook(bookToUpdateDto, id);
+
+            return _mapper.Map<BookResponseDto>(updatedBook);
+        }
     }
 }

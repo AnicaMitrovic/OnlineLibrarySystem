@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Application.Interfaces;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
 
@@ -27,27 +28,28 @@ namespace OnlineLibrarySystem.Api.Controllers
             return Ok(await _bookService.SearchBooks(searchBookDto));
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddBook([FromBody]BookRequestDto newBook)
-        //{
-        //    if (newBook == null)
-        //    {
-        //        return BadRequest(newBook);
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> AddBook([FromBody] BookRequestDto newBookDto)
+        {
+            if (newBookDto is null)
+            {
+                return BadRequest(newBookDto);
+            }
 
-        //    return Ok(await _bookService.AddBook(newBook));
-        //}
+            return Ok(await _bookService.AddBook(newBookDto));
+        }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteBook(int id)
-        //{
-        //    return Ok(await _bookService.DeleteBook(id));
-        //}
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBook(int id)
+        {
+            return Ok(await _bookService.DeleteBook(id));
+        }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateBook(int id, [FromBody] Book bookToUpdate)
-        //{
-        //    return Ok(await _bookService.UpdateBook(id, bookToUpdate));
-        //}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBook([FromBody] BookRequestDto bookToUpdateDto, int id)
+        {
+            return Ok(await _bookService.UpdateBook(bookToUpdateDto, id));
+        }
     }
 }

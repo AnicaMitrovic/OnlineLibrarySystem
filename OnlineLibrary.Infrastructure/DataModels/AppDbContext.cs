@@ -13,7 +13,19 @@ namespace OnlineLibrary.Infrastructure.DataModels
             set
             {
                 _bookList = value;
-            }           
+            }
+        }
+
+        public List<User> Users
+        {
+            get
+            {
+                return _userList;
+            }
+            set
+            {
+                _userList = value;
+            }
         }
 
         private static List<Book> _bookList = new List<Book>
@@ -28,6 +40,11 @@ namespace OnlineLibrary.Infrastructure.DataModels
             new Book {Id = 8, Title = "The Hobbit", Author = "J.R.R. Tolkien", Publisher = "George Allen & Unwin"},
             new Book {Id = 9, Title = "Brave New World", Author = "Aldous Huxley", Publisher = "Chatto & Windus"},
             new Book {Id = 10, Title = "The Chronicles of Narnia", Author = "C.S. Lewis", Publisher = "Geoffrey Bles"}
+        };
+
+        private static List<User> _userList = new List<User>
+        {
+            new User { Id = 1, Username = "admin", Password = "admin" }
         };
     }
 }
