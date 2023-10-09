@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineLibrary.Domain.Entities;
+using OnlineLibrary.Application.Interfaces;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
 using OnlineLibrary.Infrastructure.Interfaces;
 
@@ -7,16 +7,21 @@ namespace OnlineLibrary.Api.Controllers
 {
     public class AuthController : ControllerBase
     {
-        private readonly IAuthRepository _authRepo;
-        public AuthController(IAuthRepository authRepo)
+        private readonly IAuthService _authService;
+        public AuthController(IAuthService authService)
         {
-            _authRepo = authRepo;
+            _authService = authService;
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(UserLoginRequestDto request)
+        public async Task<IActionResult> Login([FromBody] UserLoginRequestDto request)
         {
-            var response = await _authRepo.Login(request.Username, request.Password);
+            if (request is null)
+            {
+                return BadRequest(request);
+            }
+
+            var response = await _authService.Login(request.Username, request.Password);
             if (!response.Success)
             {
                 return BadRequest(response);

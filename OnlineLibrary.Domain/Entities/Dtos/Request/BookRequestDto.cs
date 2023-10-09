@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace OnlineLibrary.Domain.Entities.Dtos.Request
+﻿namespace OnlineLibrary.Domain.Entities.Dtos.Request
 {
     public class BookRequestDto
     {
-        //[Required]
-        public string? Title { get; set; }
-        public string? Author { get; set; }
-        public string? Publisher { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Author { get; set; } = string.Empty;
+        public string Publisher { get; set; } = string.Empty;
     }
 }

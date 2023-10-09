@@ -44,6 +44,7 @@ namespace OnlineLibrarySystem.Api
 
             builder.Services.AddScoped<IBookService, BookService>();
             builder.Services.AddScoped<IBookRepository, BookRepository>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
@@ -63,6 +64,7 @@ namespace OnlineLibrarySystem.Api
                 });
 
             builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
+            builder.Services.AddTransient<CustomHeaderMiddlerware>();
 
             var app = builder.Build();
 
@@ -80,6 +82,8 @@ namespace OnlineLibrarySystem.Api
             app.UseAuthorization();
 
             app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+
+            app.UseMiddleware<CustomHeaderMiddlerware>();
 
             app.MapControllers();
 
