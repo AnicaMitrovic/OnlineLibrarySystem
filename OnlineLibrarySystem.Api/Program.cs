@@ -25,7 +25,8 @@ namespace OnlineLibrarySystem.Api
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c => {
+            builder.Services.AddSwaggerGen(c =>
+            {
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Description = """Stand Authorization header using the Bearer scheme. Example: "bearer {token}" """,
@@ -76,7 +77,7 @@ namespace OnlineLibrarySystem.Api
             }
 
             app.UseHttpsRedirection();
-            
+
             app.UseAuthentication();
 
             app.UseAuthorization();

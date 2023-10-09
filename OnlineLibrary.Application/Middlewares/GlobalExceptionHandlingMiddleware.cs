@@ -25,7 +25,7 @@ namespace OnlineLibrary.Application.Middlewares
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                await HandleExceptionAsync(context, ex);               
+                await HandleExceptionAsync(context, ex);
             }
         }
 

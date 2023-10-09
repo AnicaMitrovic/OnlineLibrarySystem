@@ -33,7 +33,7 @@ namespace OnlineLibrary.Infrastructure.Services
 
         public async Task<List<BookResponseDto>> GetAllBooks()
         {
-            List<Book> books = await _bookRepository.GetAllBooks();           
+            List<Book> books = await _bookRepository.GetAllBooks();
 
             return books.Select(book => _mapper.Map<BookResponseDto>(book)).ToList();
         }
