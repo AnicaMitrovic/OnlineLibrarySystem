@@ -23,13 +23,13 @@ namespace OnlineLibrarySystem.Api.Controllers
         }
 
         [HttpPost("search")]
-        public async Task<IActionResult> SearchBooks(SearchBookRequestDto searchBookDto)
+        public async Task<IActionResult> SearchBooks([FromBody] SearchBookRequestDto searchBookDto)
         {
             return Ok(await _bookService.SearchBooks(searchBookDto));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBook(BookRequestDto newBookDto)
+        public async Task<IActionResult> AddBook([FromBody] BookRequestDto newBookDto)
         {
             if (newBookDto is null)
             {
@@ -43,12 +43,24 @@ namespace OnlineLibrarySystem.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            return Ok(await _bookService.DeleteBook(id));
+            var responseId = await _bookService.DeleteBook(id);
+
+            if (responseId is null)
+            {
+                return NotFound(responseId);
+            }
+
+            return Ok(responseId);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBook([FromBody] BookRequestDto bookToUpdateDto, int id)
         {
+            if (bookToUpdateDto is null)
+            {
+                return BadRequest(bookToUpdateDto);
+            }
+
             return Ok(await _bookService.UpdateBook(bookToUpdateDto, id));
         }
     }

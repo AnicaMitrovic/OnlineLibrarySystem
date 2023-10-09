@@ -31,7 +31,7 @@ namespace OnlineLibrary.Tests
         };
 
         [Fact]
-        public async Task SearchBooks_ReturnsCorrectBooks()
+        public async Task SearchBooks_Should_ReturnBooksBasedOnFilter()
         {
             // Arrange
             var searchBookDto = new SearchBookRequestDto { Title = "Test" };
@@ -58,7 +58,7 @@ namespace OnlineLibrary.Tests
         }
 
         [Fact]
-        public async Task GetAllBooks_ReturnsAllBooks()
+        public async Task GetAllBooks_Should_ReturnAllBooks()
         {
             // Arrange
             var dbContext = new AppDbContext();

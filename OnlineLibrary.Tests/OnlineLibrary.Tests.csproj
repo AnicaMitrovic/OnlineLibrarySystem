@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="FluentAssertions" Version="7.0.0-alpha.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
     <PackageReference Include="Moq" Version="4.20.69" />
     <PackageReference Include="xunit" Version="2.4.2" />
@@ -27,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OnlineLibrary.Domain\OnlineLibrary.Domain.csproj" />
     <ProjectReference Include="..\OnlineLibrary.Infrastructure\OnlineLibrary.Infrastructure.csproj" />
+    <ProjectReference Include="..\OnlineLibrarySystem.Api\OnlineLibrary.Api.csproj" />
   </ItemGroup>
 
 </Project>
