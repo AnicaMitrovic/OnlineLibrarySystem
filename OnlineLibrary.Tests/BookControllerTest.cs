@@ -127,6 +127,41 @@ namespace OnlineLibrary.Tests
             Assert.Equal(addedBook, (result as OkObjectResult)?.Value);
         }
 
+        [Fact]
+        public async Task UpdateBook_WhenValidInput_ReturnsUpdatedBook()
+        {
+            // Arrange
+            var bookToUpdateDto = new BookRequestDto { Title = "New Title", Author = "New Author", Publisher = "New Publisher" };
+            var updatedBookDto = new BookResponseDto { Id = 1, Title = "New Title", Author = "New Author", Publisher = "New Publisher" };
+            int idToUpdate = 1;
 
+            _bookServiceMock.Setup(s => s.UpdateBook(bookToUpdateDto, idToUpdate))
+                .ReturnsAsync(updatedBookDto);
+
+            // Act
+            var result = await _controller.UpdateBook(bookToUpdateDto, idToUpdate);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnValue = Assert.IsType<BookResponseDto>(okResult.Value);
+            Assert.Equal(updatedBookDto.Id, returnValue.Id);
+            Assert.Equal(updatedBookDto.Title, returnValue.Title);
+            Assert.Equal(updatedBookDto.Author, returnValue.Author);
+            Assert.Equal(updatedBookDto.Publisher, returnValue.Publisher);
+        }
+
+        [Fact]
+        public async Task UpdateBook_WhenNullInput_ReturnsBadRequest()
+        {
+            // Arrange
+            BookRequestDto bookToUpdateDto = null;
+            int idToUpdate = 1;
+
+            // Act
+            var result = await _controller.UpdateBook(bookToUpdateDto, idToUpdate);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
     }
 }
