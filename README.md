@@ -7,7 +7,8 @@ a.	Book ID, Book Name, Author, Publisher can be considered as attributes to the 
 2.	Books can be searched or retrieved based on search criteria like 
 Author, Publisher, Name of the Book
 3.	Remove the book from the library only for the Authorized User. You can use JWT for creating Token for Authorization & validating the user.
-4.	Update the Book name, or Author, or Publisher.
+   Currently only Login available with username ```admin```, password ```admin```
+5.	Update the Book name, or Author, or Publisher.
 
 Requirements:
 1.	APIs and Operations in REST API should be well defined.
