@@ -54,6 +54,7 @@ namespace OnlineLibrarySystem.Api.Controllers
             return Ok(responseId);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBook([FromBody] BookRequestDto bookToUpdateDto, int id)
         {

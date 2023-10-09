@@ -5,6 +5,8 @@ using OnlineLibrary.Infrastructure.Interfaces;
 
 namespace OnlineLibrary.Api.Controllers
 {
+    [Route("api/v1/auth")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -13,7 +15,7 @@ namespace OnlineLibrary.Api.Controllers
             _authService = authService;
         }
 
-        [HttpPost("Login")]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserLoginRequestDto request)
         {
             if (request is null)
