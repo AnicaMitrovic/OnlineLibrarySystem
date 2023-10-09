@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Application.Interfaces;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
+using OnlineLibrary.Domain.Entities.Dtos.Response;
 
 namespace OnlineLibrarySystem.Api.Controllers
 {
@@ -61,7 +62,14 @@ namespace OnlineLibrarySystem.Api.Controllers
                 return BadRequest(bookToUpdateDto);
             }
 
-            return Ok(await _bookService.UpdateBook(bookToUpdateDto, id));
+            BookResponseDto updatedBook = await _bookService.UpdateBook(bookToUpdateDto, id);
+
+            if (updatedBook is null)
+            {
+                return NotFound(id);
+            }
+
+            return Ok(updatedBook);
         }
     }
 }

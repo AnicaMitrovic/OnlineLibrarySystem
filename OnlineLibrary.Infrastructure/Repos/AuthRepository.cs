@@ -25,23 +25,6 @@ namespace OnlineLibrary.Infrastructure.Repos
                 .FirstOrDefault(u => u.Username.ToLower().Equals(username.ToLower()));
 
             return await Task.FromResult(user);
-
-            //if (user is null)
-            //{
-            //    response.Success = false;
-            //    response.Message = "User not found.";
-            //}
-            //else if (!VerifyPassword(password, user.Password))
-            //{
-            //    response.Success = false;
-            //    response.Message = "Wrong password.";
-            //}
-            //else
-            //{
-            //    response.Data = CreateToken(user);
-            //}
-
-            //return await Task.FromResult(response);
         }
     }
 }
