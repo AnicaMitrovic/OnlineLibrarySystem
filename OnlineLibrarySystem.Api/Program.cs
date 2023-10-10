@@ -43,14 +43,6 @@ namespace OnlineLibrarySystem.Api
                 .AddApplication()
                 .AddInfrastructure();
 
-            builder.Services.AddScoped<IBookService, BookService>();
-            builder.Services.AddScoped<IBookRepository, BookRepository>();
-            builder.Services.AddScoped<IAuthService, AuthService>();
-            builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-
-            builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
-            builder.Services.AddSingleton<AppDbContext>();
-
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -62,10 +54,7 @@ namespace OnlineLibrarySystem.Api
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
-                });
-
-            builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
-            builder.Services.AddTransient<CustomHeaderMiddlerware>();
+                });           
 
             var app = builder.Build();
 

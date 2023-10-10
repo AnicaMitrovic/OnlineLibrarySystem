@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OnlineLibrary.Application.Middlewares;
 
 namespace OnlineLibrary.Application
 {
@@ -6,12 +7,10 @@ namespace OnlineLibrary.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            var assembly = typeof(DependencyInjection).Assembly;
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
-            services.AddMediatR(configuration =>
-                configuration.RegisterServicesFromAssembly(assembly));
-
-            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddTransient<GlobalExceptionHandlingMiddleware>();
+            services.AddTransient<CustomHeaderMiddlerware>();
 
             return services;
         }
