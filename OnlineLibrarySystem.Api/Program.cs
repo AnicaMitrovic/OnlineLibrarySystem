@@ -2,14 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineLibrary.Application;
-using OnlineLibrary.Application.Interfaces;
 using OnlineLibrary.Application.Middlewares;
 using OnlineLibrary.Infrastructure;
-using OnlineLibrary.Infrastructure.Data;
-using OnlineLibrary.Infrastructure.DataModels;
-using OnlineLibrary.Infrastructure.Interfaces;
-using OnlineLibrary.Infrastructure.Repos;
-using OnlineLibrary.Infrastructure.Services;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace OnlineLibrarySystem.Api
@@ -54,7 +48,7 @@ namespace OnlineLibrarySystem.Api
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
-                });           
+                });
 
             var app = builder.Build();
 
