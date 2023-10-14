@@ -1,7 +1,7 @@
-﻿using OnlineLibrary.Domain.Entities;
+﻿using OnlineLibrary.Application.Interfaces;
+using OnlineLibrary.Domain.Entities;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
 using OnlineLibrary.Infrastructure.DataModels;
-using OnlineLibrary.Infrastructure.Interfaces;
 
 namespace OnlineLibrary.Infrastructure.Data
 {

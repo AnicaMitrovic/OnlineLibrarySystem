@@ -2,9 +2,8 @@
 using OnlineLibrary.Application.Interfaces;
 using OnlineLibrary.Infrastructure.Data;
 using OnlineLibrary.Infrastructure.DataModels;
-using OnlineLibrary.Infrastructure.Interfaces;
 using OnlineLibrary.Infrastructure.Repos;
-using OnlineLibrary.Infrastructure.Services;
+using OnlineLibrary.Application.Services;
 
 namespace OnlineLibrary.Infrastructure
 {

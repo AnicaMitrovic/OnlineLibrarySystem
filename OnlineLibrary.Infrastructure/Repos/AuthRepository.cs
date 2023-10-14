@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using OnlineLibrary.Application.Interfaces;
 using OnlineLibrary.Domain.Entities;
 using OnlineLibrary.Infrastructure.DataModels;
-using OnlineLibrary.Infrastructure.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 

@@ -3,9 +3,8 @@ using OnlineLibrary.Application.Interfaces;
 using OnlineLibrary.Domain.Entities;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
 using OnlineLibrary.Domain.Entities.Dtos.Response;
-using OnlineLibrary.Infrastructure.Interfaces;
 
-namespace OnlineLibrary.Infrastructure.Services
+namespace OnlineLibrary.Application.Services
 {
     public class BookService : IBookService
     {

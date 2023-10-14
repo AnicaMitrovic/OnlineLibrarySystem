@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Application.Interfaces;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
-using OnlineLibrary.Infrastructure.Interfaces;
 
 namespace OnlineLibrary.Api.Controllers
 {

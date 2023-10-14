@@ -1,8 +1,7 @@
 ﻿using OnlineLibrary.Domain.Entities;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
-using OnlineLibrary.Domain.Entities.Dtos.Response;
 
-namespace OnlineLibrary.Infrastructure.Interfaces
+namespace OnlineLibrary.Application.Interfaces
 {
     public interface IBookRepository
     {

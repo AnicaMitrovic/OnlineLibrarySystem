@@ -1,13 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
-using OnlineLibrary.Domain.Entities.Dtos.Request;
 using OnlineLibrary.Domain.Entities;
-using OnlineLibrary.Infrastructure.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using OnlineLibrary.Application.Interfaces;
 
-namespace OnlineLibrary.Infrastructure.Services
+namespace OnlineLibrary.Application.Services
 {
     public class AuthService : IAuthService
     {

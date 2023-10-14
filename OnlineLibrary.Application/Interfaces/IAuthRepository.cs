@@ -1,6 +1,6 @@
 ﻿using OnlineLibrary.Domain.Entities;
 
-namespace OnlineLibrary.Infrastructure.Interfaces
+namespace OnlineLibrary.Application.Interfaces
 {
     public interface IAuthRepository
     {

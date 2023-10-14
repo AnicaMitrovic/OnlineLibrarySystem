@@ -2,9 +2,9 @@
 using Moq;
 using OnlineLibrary.Domain.Entities.Dtos.Response;
 using OnlineLibrary.Domain.Entities;
-using OnlineLibrary.Infrastructure.Interfaces;
-using OnlineLibrary.Infrastructure.Services;
+using OnlineLibrary.Application.Services;
 using OnlineLibrary.Domain.Entities.Dtos.Request;
+using OnlineLibrary.Application.Interfaces;
 
 namespace OnlineLibrary.Tests
 {
